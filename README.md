@@ -12,6 +12,8 @@ This repository provides SiMCoding implementations for supervised representation
 
 All final classifiers are **logistic regression with `C=1.0`, `solver="lbfgs"`, and `max_iter=1000`**, fitted on training features and labels only. Accuracy is reported as a percentage. No pretrained backbone is required.
 
+The SiMCoding model architectures for PD Activity and 3D MRI are available in [`simcoding/architectures`](simcoding/architectures).
+
 ## Installation
 
 Use Python 3.10 or later. A CUDA-capable GPU is recommended for the full experiments.
