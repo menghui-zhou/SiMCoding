@@ -28,7 +28,7 @@ def load_data(args):
         if train.class_to_idx != test.class_to_idx:
             raise ValueError("Training and validation class folders must match.")
     if len(set(np.asarray(train.targets).tolist())) != 10:
-        raise ValueError("Table 4 requires ten classes.")
+        raise ValueError("Incremental learning requires ten classes.")
     train = limit_per_class(train, args.train_per_class, args.seed)
     test = limit_per_class(test, args.test_per_class, args.seed)
 
@@ -80,7 +80,7 @@ def main():
     parser.add_argument("--device", choices=["auto", "cpu", "cuda"], default="auto")
     parser.add_argument("--train-per-class", type=int, default=None)
     parser.add_argument("--test-per-class", type=int, default=None)
-    parser.add_argument("--output", default="outputs/table4")
+    parser.add_argument("--output", default="outputs/incremental")
     args = parser.parse_args()
     args.eps2 = args.eps2 if args.eps2 is not None else (80.0 if args.dataset == "mnist" else 300.0)
     args.eta = args.eta if args.eta is not None else (0.5 if args.dataset == "mnist" else 10.0)
@@ -128,7 +128,7 @@ def main():
     summary["Avg. Acc."] = float(np.mean(accuracies))
     summary["Drop (%)"] = (100.0 * (accuracies[0] - accuracies[-1]) / accuracies[0]
                             if accuracies[0] else None)
-    save_csv(output / "table4.csv", [summary])
+    save_csv(output / "incremental.csv", [summary])
 
 
 if __name__ == "__main__":

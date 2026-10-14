@@ -12,7 +12,7 @@ def main():
     parser.add_argument("--noise-ratios", type=float, nargs="+", default=[0, .1, .2, .3, .4, .5])
     parser.add_argument("--exclude-original-label", action="store_true",
                         help="Force selected labels to change; default follows original uniform resampling.")
-    parser.add_argument("--output", default="outputs/table2")
+    parser.add_argument("--output", default="outputs/label_noise")
     args = parser.parse_args()
     if any(not 0 <= ratio <= 1 for ratio in args.noise_ratios) or len(set(args.noise_ratios)) != len(args.noise_ratios):
         parser.error("noise-ratios must be unique and between 0 and 1")
@@ -21,7 +21,7 @@ def main():
         row = run_training(args, "cifar20", args.eps2,
                            Path(args.output) / f"noise_{ratio:g}", noise=ratio)
         rows.append(row)
-        save_csv(Path(args.output) / "table2.csv", rows)
+        save_csv(Path(args.output) / "label_noise.csv", rows)
 
 
 if __name__ == "__main__":

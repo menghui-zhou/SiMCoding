@@ -1,4 +1,4 @@
-"""Only the datasets needed for Tables 1, 2 and 4."""
+"""Datasets for representation learning and incremental learning."""
 import tarfile
 import urllib.request
 from pathlib import Path
